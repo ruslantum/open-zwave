@@ -250,7 +250,22 @@ namespace OpenZWave
 		        m_id = ((uint32)(id & 0xFFFFFFFF));
 		        m_id1 = (uint32)(id >> 32);
 		}
-	private:
+		/* construct a ValueID based on the HomeID and the unit64 returned from GetID
+		 * \param _homeId - The HomeID 
+		 * \param id - The ID returned from ValueID::GetID
+		 * \see ValueID::GetId
+		 */
+		ValueID
+		(
+		        uint32_t _homeId,
+            uint64_t id
+		):
+		        m_homeId(_homeId)
+		{
+		        m_id = ((uint32)(id & 0xFFFFFFFF));
+		        m_id1 = (uint32)(id >> 32);
+		}
+private:
 		// Construct a value id for use in notifications
 		ValueID( uint32 const _homeId, uint8 const _nodeId ): m_id1( 0 ),m_homeId( _homeId ){ m_id = ((uint32)_nodeId)<<24; }
 		ValueID( uint32 const _homeId, uint8 const _nodeId, uint32 const _instance ): 
